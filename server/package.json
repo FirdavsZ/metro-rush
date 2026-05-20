@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "reset-db": "node scripts/resetDatabase.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

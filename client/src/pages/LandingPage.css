@@ -1,0 +1,208 @@
+.landing-page {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 0%, #1a0045 0%, #0a0020 40%, #05000f 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.landing-main {
+  position: relative;
+  z-index: 1;
+  padding-top: 64px;
+}
+
+/* ── Hero ── */
+.landing-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+}
+
+.landing-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--font-game);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-cyan);
+  animation: fadeDown 0.6s ease;
+}
+
+.landing-title {
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-game);
+  font-size: clamp(3.5rem, 12vw, 8rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 24px;
+  animation: fadeDown 0.7s ease 0.1s both;
+}
+
+.title-metro {
+  color: var(--white);
+  text-shadow: 0 0 30px rgba(255,255,255,0.3);
+}
+.title-rush {
+  color: var(--cyan);
+  text-shadow: 0 0 30px var(--cyan), 0 0 60px rgba(0, 212, 255, 0.5);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { text-shadow: 0 0 30px var(--cyan), 0 0 60px rgba(0,212,255,0.4); }
+  50%       { text-shadow: 0 0 50px var(--cyan), 0 0 100px rgba(0,212,255,0.7); }
+}
+
+.landing-subtitle {
+  font-family: var(--font-ui);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--gray);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  animation: fadeDown 0.7s ease 0.2s both;
+}
+
+.landing-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  animation: fadeDown 0.7s ease 0.3s both;
+}
+
+/* ── Features ── */
+.landing-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+}
+
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  transition: var(--transition);
+  animation: fadeUp 0.6s ease both;
+}
+.feature-card:hover {
+  border-color: var(--purple);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-purple);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 14px;
+}
+.feature-card h3 {
+  font-family: var(--font-game);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  margin-bottom: 10px;
+}
+.feature-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ── Controls ── */
+.landing-controls {
+  max-width: 700px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--font-game);
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  color: var(--purple-light);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+}
+
+kbd {
+  font-family: var(--font-game);
+  font-size: 0.65rem;
+  color: var(--gold);
+  background: rgba(255, 204, 0, 0.1);
+  border: 1px solid rgba(255, 204, 0, 0.3);
+  border-radius: 6px;
+  padding: 4px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.control-item span {
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
+/* ── Footer ── */
+.landing-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+  color: rgba(170, 170, 200, 0.4);
+  font-size: 0.8rem;
+}
+
+/* ── Animations ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .landing-hero { padding: 60px 20px 40px; }
+  .landing-title { gap: 10px; }
+  .landing-cta { flex-direction: column; align-items: center; }
+}

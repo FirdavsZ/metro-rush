@@ -1,0 +1,240 @@
+/* ============================================================
+   METRO RUSH — Global Styles
+   Dark neon arcade aesthetic
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-deep:      #05000f;
+  --bg-dark:      #0a0020;
+  --bg-card:      #110030;
+  --bg-card-hover:#18004a;
+  --border:       rgba(130, 60, 255, 0.35);
+  --border-bright:rgba(130, 60, 255, 0.7);
+  --purple:       #8030ff;
+  --purple-light: #aa60ff;
+  --cyan:         #00d4ff;
+  --cyan-dark:    #0088bb;
+  --gold:         #ffcc00;
+  --gold-dark:    #cc9900;
+  --green:        #00ff88;
+  --red:          #ff3030;
+  --white:        #ffffff;
+  --gray:         #aaaacc;
+  --font-game:    'Orbitron', 'Courier New', monospace;
+  --font-ui:      'Rajdhani', 'Segoe UI', sans-serif;
+  --radius:       12px;
+  --radius-lg:    20px;
+  --shadow-purple: 0 0 20px rgba(128, 48, 255, 0.4);
+  --shadow-cyan:   0 0 20px rgba(0, 212, 255, 0.4);
+  --shadow-gold:   0 0 20px rgba(255, 204, 0, 0.4);
+  --transition:   all 0.25s ease;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg-deep);
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+
+/* ── Loading screen ── */
+.app-loading {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-deep);
+}
+
+/* ── Spinner ── */
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(128, 48, 255, 0.2);
+  border-top-color: var(--purple);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-game);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--purple), var(--purple-light));
+  color: var(--white);
+  box-shadow: var(--shadow-purple);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(128, 48, 255, 0.7);
+}
+
+.btn-cyan {
+  background: linear-gradient(135deg, var(--cyan-dark), var(--cyan));
+  color: var(--bg-deep);
+  box-shadow: var(--shadow-cyan);
+}
+.btn-cyan:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.7);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  color: var(--bg-deep);
+  box-shadow: var(--shadow-gold);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 204, 0, 0.7);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--purple-light);
+  border: 1.5px solid var(--border-bright);
+  box-shadow: none;
+}
+.btn-outline:hover {
+  background: rgba(128, 48, 255, 0.15);
+  border-color: var(--purple-light);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #aa0000, #ff3030);
+  color: var(--white);
+}
+.btn-danger:hover { transform: translateY(-2px); }
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-lg { padding: 16px 40px; font-size: 1rem; }
+.btn-sm { padding: 8px 18px; font-size: 0.75rem; }
+
+/* ── Card ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: var(--transition);
+}
+.card:hover { border-color: var(--border-bright); }
+
+/* ── Form ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-family: var(--font-game);
+  font-size: 0.7rem;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.form-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  color: var(--white);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  transition: var(--transition);
+  outline: none;
+}
+.form-input:focus {
+  border-color: var(--purple);
+  background: rgba(128, 48, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(128, 48, 255, 0.2);
+}
+.form-input::placeholder { color: rgba(170, 170, 200, 0.4); }
+.form-input.error { border-color: var(--red); }
+
+/* ── Alerts ── */
+.alert {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+.alert-error {
+  background: rgba(255, 48, 48, 0.12);
+  border: 1px solid rgba(255, 48, 48, 0.35);
+  color: #ff8080;
+}
+.alert-success {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  color: var(--green);
+}
+
+/* ── Glow text ── */
+.glow-text {
+  text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+}
+
+/* ── Page wrapper ── */
+.page {
+  min-height: 100vh;
+  background: var(--bg-deep);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .btn { padding: 10px 20px; font-size: 0.8rem; }
+  .btn-lg { padding: 14px 28px; font-size: 0.9rem; }
+  .card { padding: 20px; }
+}

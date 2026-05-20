@@ -23,9 +23,9 @@ export default function GamePage() {
     shield: false, magnet: false, speedBoost: false,
     puTimers: { shield: 0, magnet: 0, speedBoost: 0 },
   });
-  const [result, setResult] = useState(null);
-  const [saving, setSaving] = useState(false);
-  const [saved, setSaved]   = useState(false);
+  const [result, setResult]   = useState(null);
+  const [saving, setSaving]   = useState(false);
+  const [saved, setSaved]     = useState(null); // null | 'best' | 'kept'
   const [saveError, setSaveError] = useState('');
 
   // Auto-save when game ends and user is logged in
@@ -34,7 +34,7 @@ export default function GamePage() {
     setSaving(true);
     setSaveError('');
     api.scores.save(result)
-      .then(() => setSaved(true))
+      .then((data) => setSaved(data.newBest ? 'best' : 'kept'))
       .catch((err) => setSaveError(err.message))
       .finally(() => setSaving(false));
   }, [result]);
@@ -63,7 +63,7 @@ export default function GamePage() {
   }, []);
 
   function startGame() {
-    setSaved(false);
+    setSaved(null);
     setSaveError('');
     setResult(null);
     setStats({ score: 0, coins: 0, distance: 0, shield: false, magnet: false, speedBoost: false, puTimers: { shield: 0, magnet: 0, speedBoost: 0 } });
@@ -204,7 +204,8 @@ export default function GamePage() {
 
             <div className="save-section">
               {saving && <div className="alert alert-info">Saving score...</div>}
-              {saved && <div className="alert alert-success">Score saved to leaderboard!</div>}
+              {saved === 'best' && <div className="alert alert-success">New personal best! Leaderboard updated.</div>}
+              {saved === 'kept' && <div className="alert alert-info">Not a new personal best. Leaderboard unchanged.</div>}
               {saveError && (
                 <div className="alert alert-error">
                   {saveError}

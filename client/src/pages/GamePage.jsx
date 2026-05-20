@@ -28,6 +28,17 @@ export default function GamePage() {
   const [saved, setSaved]   = useState(false);
   const [saveError, setSaveError] = useState('');
 
+  // Auto-save when game ends and user is logged in
+  useEffect(() => {
+    if (!result || !user) return;
+    setSaving(true);
+    setSaveError('');
+    api.scores.save(result)
+      .then(() => setSaved(true))
+      .catch((err) => setSaveError(err.message))
+      .finally(() => setSaving(false));
+  }, [result]);
+
   // Build engine once
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -191,27 +202,21 @@ export default function GamePage() {
               </div>
             </div>
 
-            {!saved && (
-              <div className="save-section">
-                {saveError && <div className="alert alert-error" style={{ marginBottom: 12 }}>{saveError}</div>}
-                {user ? (
-                  <button
-                    className="btn btn-cyan"
-                    onClick={saveScore}
-                    disabled={saving}
-                  >
-                    {saving ? 'Saving...' : 'Save Score'}
+            <div className="save-section">
+              {saving && <div className="alert alert-info">Saving score...</div>}
+              {saved && <div className="alert alert-success">Score saved to leaderboard!</div>}
+              {saveError && (
+                <div className="alert alert-error">
+                  {saveError}
+                  <button className="btn btn-cyan" style={{ marginTop: 8 }} onClick={saveScore}>
+                    Retry
                   </button>
-                ) : (
-                  <div className="login-to-save">
-                    Login to save your score to the leaderboard
-                  </div>
-                )}
-              </div>
-            )}
-            {saved && (
-              <div className="alert alert-success">Score saved to leaderboard!</div>
-            )}
+                </div>
+              )}
+              {!user && (
+                <div className="login-to-save">Login to save your score to the leaderboard</div>
+              )}
+            </div>
 
             <div className="gameover-actions">
               <button className="btn btn-gold btn-lg" onClick={startGame}>
